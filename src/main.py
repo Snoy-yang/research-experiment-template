@@ -32,8 +32,12 @@ def run(cfg: dict) -> dict:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/default.yaml")
+    ap.add_argument("--seed", type=int, default=None, help="覆盖配置中的随机种子")
     args = ap.parse_args()
     cfg = load_config(Path(args.config))
+    if args.seed is not None:                                                      
+        cfg["experiment"]["seed"] = args.seed                                     
+
     metrics = run(cfg)
     out = Path(cfg["output"]["dir"])
     out.mkdir(exist_ok=True)
