@@ -1,0 +1,8 @@
+experiment:
+  name: demo_ekf
+  seed: 42
+  n_steps: 200
+  noise_std: 0.10
+output:
+  dir: results
+  metrics_file: metrics.json

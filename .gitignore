@@ -1,0 +1,16 @@
+# 实验结果与日志：可复现但不入库，避免仓库膨胀与结果混淆
+results/*
+!results/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# 运行缓存 / 字节码
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# 本地环境与密钥（绝不入库）
+.env
+.venv/
+*.pem
+id_rsa*

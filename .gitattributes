@@ -1,0 +1,44 @@
+# 换行符规则：钉在仓库里，而不是依赖每个人本地的 core.autocrlf
+#
+# 背景：Linux/macOS 用 LF，Windows 用 CRLF。
+# 不统一的话，同一份文件在不同系统上会"整篇都被改动"（diff 全红全绿），
+# 而 *.sh 一旦被签出成 CRLF，在 Linux 里执行会报：
+#     bash: ./run.sh: /usr/bin/env: bad interpreter: No such file or directory
+#
+# 原则：仓库内一律存 LF；工作区按下面的规则签出。
+
+# 让 git 自动识别文本文件并在仓库里存 LF
+* text=auto
+
+# 必须永远是 LF：跨平台运行 / 被 Linux 读取的文件
+*.sh     text eol=lf
+*.bash   text eol=lf
+*.py     text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.json   text eol=lf
+*.md     text eol=lf
+*.txt    text eol=lf
+*.cfg    text eol=lf
+*.toml   text eol=lf
+Dockerfile      text eol=lf
+Makefile        text eol=lf
+
+# Windows 专属脚本保持 CRLF（cmd / PowerShell 对 LF 不友好）
+*.bat    text eol=crlf
+*.cmd    text eol=crlf
+*.ps1    text eol=crlf
+
+# 二进制：一律不做换行符转换，也不做文本 diff
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.bag    binary
+*.db3    binary
+*.mcap   binary
+*.mp4    binary
+*.zip    binary
+*.img    binary
+*.vdi    binary
